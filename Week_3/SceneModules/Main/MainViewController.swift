@@ -38,16 +38,28 @@ class MainViewController: BaseViewController<MainViewModel> {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     @objc func testButtonAction(_ sender: UIButton) {
-        print("Bastik")
-        let viewController = TestViewController()
-        viewController.title = "TEST"
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//
-        let newNavigationController = UINavigationController(rootViewController: viewController)
-        newNavigationController.navigationBar.backgroundColor = .red
-        newNavigationController.navigationBar.tintColor = .green
-        self.present(newNavigationController, animated: true, completion: nil)
+        
+        fireCharacterListView()
+        
+//        let viewController = TestViewController()
+//        viewController.title = "TEST"
+////        self.navigationController?.pushViewController(viewController, animated: true)
+////
+//        let newNavigationController = UINavigationController(rootViewController: viewController)
+//        newNavigationController.navigationBar.backgroundColor = .red
+//        newNavigationController.navigationBar.tintColor = .green
+//        self.present(newNavigationController, animated: true, completion: nil)
+    }
+    
+    private func fireCharacterListView() {
+        let characterListView = CharacterListViewBuilder.build()
+        self.navigationController?.pushViewController(characterListView, animated: true)
     }
     
 }

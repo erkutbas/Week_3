@@ -18,6 +18,12 @@ class MainViewBuilder {
         viewController.tabBarItem.image = TabBarImages.home.value
         viewController.tabBarItem.selectedImage = TabBarImages.homeSelected.value
         viewController.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemBackground
+        viewController.navigationController?.navigationBar.standardAppearance = appearance;
+        viewController.navigationController?.navigationBar.scrollEdgeAppearance = viewController.navigationController?.navigationBar.standardAppearance
 
         return navigationViewController
 
