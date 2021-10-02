@@ -36,6 +36,8 @@ class MainViewController: BaseViewController<MainViewModel> {
         
         ])
         
+        subscribeViewModelPublishers()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +62,17 @@ class MainViewController: BaseViewController<MainViewModel> {
     private func fireCharacterListView() {
         let characterListView = CharacterListViewBuilder.build()
         self.navigationController?.pushViewController(characterListView, animated: true)
+    }
+    
+    private func subscribeViewModelPublishers() {
+        viewModel.listenTutorialEvent { [weak self] in
+            self?.fireTutorialView()
+        }
+    }
+    
+    private func fireTutorialView() {
+        guard let topViewController = UIApplication.topViewController() else { return }
+        topViewController.present(TutorialViewBuilder.build(), animated: true, completion: nil)
     }
     
 }

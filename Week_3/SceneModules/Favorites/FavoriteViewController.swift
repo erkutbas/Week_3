@@ -8,7 +8,7 @@
 import UIKit
 
 class FavoriteViewController: BaseViewController<FavoriteViewModel> {
-
+    
     override func prepareViewControllerConfigurations() {
         super.prepareViewControllerConfigurations()
         
