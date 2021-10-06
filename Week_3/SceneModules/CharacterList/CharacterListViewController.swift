@@ -19,6 +19,8 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
     override func prepareViewControllerConfigurations() {
         super.prepareViewControllerConfigurations()
         addmainComponent()
+        subscribeViewModelListeners()
+        viewModel.getCharacterList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,7 +28,7 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func addmainComponent() {
+    private func addmainComponent() {
         //mainComponent = mainComponent()
         mainComponent = ItemListView()
         mainComponent.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +45,17 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
             mainComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             
         ])
+    }
+    
+    private func subscribeViewModelListeners() {
+        viewModel.subscribeState { [weak self] state in
+            switch state {
+            case .done:
+                print("data is ready")
+            case .loading:
+                print("data is getting")
+            }
+        }
     }
     
 }
