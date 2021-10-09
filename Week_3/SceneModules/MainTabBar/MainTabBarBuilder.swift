@@ -13,10 +13,17 @@ class MainTabBarBuilder {
         
         let mainViewController = MainViewBuilder.build()
         let favoriteViewController = FavoriteViewBuilder.build()
+        let tutorialViewController = TutorialViewBuilder.build()
+        let jumper = ViewController1()
+        let navigationController = UINavigationController(rootViewController: jumper)
+        jumper.title = "Jumper"
+        jumper.tabBarItem.image = TabBarImages.bug.value
+        jumper.tabBarItem.selectedImage = TabBarImages.bugSelected.value
 
         let tabViewController = MainTabBarController()
         tabViewController.viewControllers = [mainViewController,
-                                             favoriteViewController]
+                                             favoriteViewController,
+                                             navigationController]
         tabViewController.tabBar.tintColor = .black
         tabViewController.tabBar.backgroundColor = .systemBackground
         
