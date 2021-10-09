@@ -13,7 +13,7 @@ class TutorialViewBuilder {
     class func build() -> UIViewController {
         let viewModel = TutorialViewModel(tutorials: [GenericContainerData(image: PageViewImages.page1.value, containerTitle: "Page1", containerIndex: 0),
                                                       GenericContainerData(image: PageViewImages.page2.value, containerTitle: "Page2", containerIndex: 1),
-                                                      GenericContainerData(image: PageViewImages.page3.value, containerTitle: "Page3", containerIndex: 2)])
+                                                      GenericContainerData(image: PageViewImages.page3.value, containerTitle: "Page3", containerIndex: 2)], applicationInfoManager: ApplicationGeneralInfoManager.shared)
         let viewController = TutorialViewController(viewModel: viewModel)
         viewController.title = "Favorite"
         viewController.tabBarItem.image = TabBarImages.favorite.value

@@ -13,13 +13,14 @@ class ItemListView: BaseView {
         print("DEINIT ItemListView")
     }
     
-    weak var delegate: ItemListProtocol?
+    weak var pikacu: ItemListProtocol?
     
     private lazy var tableView: UITableView = {
         let temp = UITableView()
         temp.translatesAutoresizingMaskIntoConstraints = false
         temp.delegate = self
         temp.dataSource = self
+        temp.estimatedRowHeight = UITableView.automaticDimension
         temp.register(ItemTableViewCell.self, forCellReuseIdentifier: ItemTableViewCell.identifier)
         return temp
     }()
@@ -43,7 +44,9 @@ class ItemListView: BaseView {
     }
     
     func reloadTableView() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
 }
@@ -51,16 +54,16 @@ class ItemListView: BaseView {
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return delegate?.askNumberOfSection() ?? 0
+        return pikacu?.askNumberOfSection() ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return delegate?.askNumberOfItem(in: section) ?? 0
+        return pikacu?.askNumberOfItem(in: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let data = delegate?.askData(at: indexPath.row) else { fatalError("Please provide data") }
+        guard let data = pikacu?.askData(at: indexPath.row) else { fatalError("Please provide data") }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as? ItemTableViewCell else { return UITableViewCell() }
         
@@ -68,7 +71,5 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
 }
 

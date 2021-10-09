@@ -18,8 +18,13 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
 
     override func prepareViewControllerConfigurations() {
         super.prepareViewControllerConfigurations()
+        // adding major components
         addmainComponent()
+        
+        // listen view states
         subscribeViewModelListeners()
+        
+        // fire getting data
         viewModel.getCharacterList()
     }
     
@@ -33,7 +38,7 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
         mainComponent = ItemListView()
         mainComponent.translatesAutoresizingMaskIntoConstraints = false
         
-        mainComponent.delegate = viewModel
+        mainComponent.pikacu = viewModel
         
         view.addSubview(mainComponent)
         
@@ -48,12 +53,17 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
     }
     
     private func subscribeViewModelListeners() {
+        
         viewModel.subscribeState { [weak self] state in
             switch state {
             case .done:
                 print("data is ready")
+                self?.mainComponent.reloadTableView()
             case .loading:
                 print("data is getting")
+            case .failure:
+                print("errror")
+                // show alert popup
             }
         }
     }

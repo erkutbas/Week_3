@@ -19,6 +19,11 @@ class TutorialViewController: BaseViewController<TutorialViewModel> {
     
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.killMe()
+    }
+    
     private func addPageViewController() {
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false

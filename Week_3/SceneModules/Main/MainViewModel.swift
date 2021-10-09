@@ -11,7 +11,10 @@ class MainViewModel {
     
     private var tutorialFireBlock: (() -> Void)?
     
-    init() {
+    private let applicationInfoManager: ApplicationGeneralInfoProtocol
+    
+    init(applicationInfoManager: ApplicationGeneralInfoProtocol) {
+        self.applicationInfoManager = applicationInfoManager
         fireTutorial()
     }
     
@@ -20,6 +23,9 @@ class MainViewModel {
     }
     
     func fireTutorial() {
+        
+        guard !applicationInfoManager.isTutorialViewSeen() else { return }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.tutorialFireBlock?()
         }
