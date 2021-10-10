@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import RxSwift
 
 extension Selector {
     static let getDataAction = #selector(FavoriteViewController.getDataAction)
 }
 
 class FavoriteViewController: BaseViewController<FavoriteViewModel> {
+    
+    private let disposeBag = DisposeBag()
     
     private lazy var test: UIButton = {
         let temp = UIButton(type: .system)
@@ -35,6 +38,8 @@ class FavoriteViewController: BaseViewController<FavoriteViewModel> {
         
         ])
         
+        subscribeViewModelPublishers()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +48,31 @@ class FavoriteViewController: BaseViewController<FavoriteViewModel> {
     }
     
     @objc func getDataAction(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .getDataByUsingExternalInteractions, object: nil)
+        viewModel.getCharacterListDataExternally()
+    }
+    
+    private func subscribeViewModelPublishers() {
+        viewModel.subscribeDataFlow { [weak self] retrived in
+            print("DATA HAS ALREADY RETRIEVED : \(retrived)")
+            DispatchQueue.main.async {
+                self?.dataFlowHandler(with: retrived)
+            }
+        }
+        .disposed(by: disposeBag)
+    }
+    
+    private func dataFlowHandler(with value: Bool) {
+        
+        UIView.transition(with: test, duration: 0.6, options: .transitionCrossDissolve) {
+            if value {
+                self.test.setTitle("DATA HAS ALREADY GATHERED", for: .normal)
+            } else {
+                self.test.setTitle("DATA HAS NOT GATHERED YET", for: .normal)
+            }
+        }
+
+        
+        
     }
     
 }

@@ -6,7 +6,22 @@
 //
 
 import Foundation
+import RxSwift
 
 class FavoriteViewModel {
+    
+    private let operationManager: CharacterListOperationsProtocol
+    
+    init(operationManager: CharacterListOperationsProtocol) {
+        self.operationManager = operationManager
+    }
+    
+    func subscribeDataFlow(with completion: @escaping (Bool) -> Void) -> Disposable {
+        return operationManager.subscribeDataFlow(with: completion)
+    }
+    
+    func getCharacterListDataExternally() {
+        operationManager.getCharacterListData()
+    }
     
 }

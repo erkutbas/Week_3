@@ -10,8 +10,8 @@ import UIKit
 class FavoriteViewBuilder {
     
     class func build() -> UIViewController {
-        
-        let viewModel = FavoriteViewModel()
+        let manager = CharacterListOperationsManager.shared
+        let viewModel = FavoriteViewModel(operationManager: manager)
         let viewController = FavoriteViewController(viewModel: viewModel)
         viewController.title = "Favorite"
         viewController.tabBarItem.image = TabBarImages.favorite.value

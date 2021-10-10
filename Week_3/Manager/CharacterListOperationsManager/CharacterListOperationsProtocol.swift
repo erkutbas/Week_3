@@ -10,5 +10,10 @@ import RxSwift
 
 protocol CharacterListOperationsProtocol {
     
+    func getCharacterListData()
+    
+    func subscribeDataPublisher(with completion: @escaping CharacterListResultBlock) -> Disposable
+    
+    func subscribeDataFlow(with completion: @escaping (Bool) -> Void) -> Disposable
     
 }

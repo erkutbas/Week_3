@@ -7,26 +7,27 @@
 
 import Foundation
 import DefaultNetworkOperationPackage
-
-extension Selector {
-    static let fireDataFlow = #selector(CharacterListViewModel.fireDataFlow)
-}
+import RxSwift
 
 class CharacterListViewModel {
     
     deinit {
         print("DEINIT CharacterListViewModel")
-        NotificationCenter.default.removeObserver(self, name: .getDataByUsingExternalInteractions, object: nil)
     }
     
+    private let disposeBag = DisposeBag()
+    
     private let formatter: CharacterListDataFormatterProtocol
+    private let operationManager: CharacterListOperationsProtocol
     
     private var data: CharacterDataResponse?
     private var state: CharacterListStateBlock?
     
-    init(formatter: CharacterListDataFormatterProtocol) {
+    init(formatter: CharacterListDataFormatterProtocol,
+         operationManager: CharacterListOperationsProtocol) {
         self.formatter = formatter
-        addExternalUserInteractions()
+        self.operationManager = operationManager
+        subscribeOperationManagerPublisher()
     }
     
     func subscribeState(completion: @escaping CharacterListStateBlock) {
@@ -35,51 +36,24 @@ class CharacterListViewModel {
     
     func getCharacterList() {
         state?(.loading)
-        fireApiCall(with: apiCallHandler)
-    }
-    
-    private func fireApiCall(with completion: @escaping (Result<CharacterDataResponse, ErrorResponse>) -> Void) {
-        
-        do {
-            let urlRequest = try MarvelCharactersApiServiceProvider().returnUrlRequest()
-            APIManager.shared.executeRequest(urlRequest: urlRequest, completion: completion)
-        } catch let error {
-            print("error : \(error)")
-        }
-        
+        operationManager.getCharacterListData()
     }
     
     private func dataHandler(with response: CharacterDataResponse) {
         data = response
         state?(.done)
-        fireSampleNotif()
     }
     
-    private func addExternalUserInteractions() {
-        NotificationCenter.default.addObserver(self, selector: .fireDataFlow, name: .getDataByUsingExternalInteractions, object: nil)
+    private func subscribeOperationManagerPublisher() {
+        operationManager.subscribeDataPublisher { [weak self] result in
+            switch result {
+            case .failure(let error):
+                print("error : \(error)")
+            case .success(let response):
+                self?.dataHandler(with: response)
+            }
+        }.disposed(by: disposeBag)
     }
-    
-    @objc func fireDataFlow(_ sender: Notification) {
-        getCharacterList()
-    }
-    
-    // MARK: - CallBack Listener
-    private lazy var apiCallHandler: (Result<CharacterDataResponse, ErrorResponse>) -> Void = { [weak self] result in
-        // to show how to handle error .....
-
-        switch result {
-        case .failure(let error):
-            print("error : \(error)")
-            self?.state?(.failure)
-        case .success(let data):
-            self?.dataHandler(with: data)
-        }
-    }
-    
-    private func fireSampleNotif() {
-        NotificationCenter.default.post(name: .sampleNotif, object: nil)
-    }
-    
     
 }
 
