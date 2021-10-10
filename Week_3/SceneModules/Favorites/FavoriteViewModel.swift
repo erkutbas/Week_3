@@ -11,9 +11,12 @@ import RxSwift
 class FavoriteViewModel {
     
     private let operationManager: CharacterListOperationsProtocol
+    private let operationManagerCombine: CharacterListOperationCombineProtocol
     
-    init(operationManager: CharacterListOperationsProtocol) {
+    init(operationManager: CharacterListOperationsProtocol,
+         operationManagerCombine: CharacterListOperationCombineProtocol) {
         self.operationManager = operationManager
+        self.operationManagerCombine = operationManagerCombine
     }
     
     func subscribeDataFlow(with completion: @escaping (Bool) -> Void) -> Disposable {

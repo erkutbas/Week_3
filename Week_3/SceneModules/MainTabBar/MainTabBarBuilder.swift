@@ -13,7 +13,6 @@ class MainTabBarBuilder {
         
         let mainViewController = MainViewBuilder.build()
         let favoriteViewController = FavoriteViewBuilder.build()
-        let tutorialViewController = TutorialViewBuilder.build()
         let jumper = ViewController1()
         let navigationController = UINavigationController(rootViewController: jumper)
         jumper.title = "Jumper"

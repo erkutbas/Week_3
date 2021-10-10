@@ -8,8 +8,11 @@
 import Foundation
 import DefaultNetworkOperationPackage
 import RxSwift
+import Combine
 
 class CharacterListViewModel {
+    
+    private var subscriptions = Set<AnyCancellable>()
     
     deinit {
         print("DEINIT CharacterListViewModel")
@@ -19,14 +22,17 @@ class CharacterListViewModel {
     
     private let formatter: CharacterListDataFormatterProtocol
     private let operationManager: CharacterListOperationsProtocol
+    private let operationManagerCombine: CharacterListOperationCombineProtocol
     
     private var data: CharacterDataResponse?
     private var state: CharacterListStateBlock?
     
     init(formatter: CharacterListDataFormatterProtocol,
-         operationManager: CharacterListOperationsProtocol) {
+         operationManager: CharacterListOperationsProtocol,
+         operationManagerCombine: CharacterListOperationCombineProtocol) {
         self.formatter = formatter
         self.operationManager = operationManager
+        self.operationManagerCombine = operationManagerCombine
         subscribeOperationManagerPublisher()
     }
     
@@ -36,7 +42,8 @@ class CharacterListViewModel {
     
     func getCharacterList() {
         state?(.loading)
-        operationManager.getCharacterListData()
+        //operationManager.getCharacterListData()
+        operationManagerCombine.getCharacterListData()
     }
     
     private func dataHandler(with response: CharacterDataResponse) {
@@ -45,14 +52,24 @@ class CharacterListViewModel {
     }
     
     private func subscribeOperationManagerPublisher() {
-        operationManager.subscribeDataPublisher { [weak self] result in
+//        operationManager.subscribeDataPublisher { [weak self] result in
+//            switch result {
+//            case .failure(let error):
+//                print("error : \(error)")
+//            case .success(let response):
+//                self?.dataHandler(with: response)
+//            }
+//        }.disposed(by: disposeBag)
+        
+        operationManagerCombine.subscribeDataPublisher { [weak self] result in
             switch result {
             case .failure(let error):
                 print("error : \(error)")
             case .success(let response):
                 self?.dataHandler(with: response)
             }
-        }.disposed(by: disposeBag)
+        }.store(in: &subscriptions)
+
     }
     
 }
