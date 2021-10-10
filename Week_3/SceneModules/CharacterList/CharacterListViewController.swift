@@ -11,6 +11,7 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
     
     deinit {
         print("DEINIT CharacterListViewController")
+        NotificationCenter.default.removeObserver(self, name: .sampleNotif, object: nil)
     }
     
     //private var mainComponent: mainComponent!
@@ -23,9 +24,10 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
         
         // listen view states
         subscribeViewModelListeners()
+        addObserver()
         
         // fire getting data
-        viewModel.getCharacterList()
+//        viewModel.getCharacterList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +40,7 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
         mainComponent = ItemListView()
         mainComponent.translatesAutoresizingMaskIntoConstraints = false
         
-        mainComponent.pikacu = viewModel
+        mainComponent.delegate = viewModel
         
         view.addSubview(mainComponent)
         
@@ -58,7 +60,7 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
             switch state {
             case .done:
                 print("data is ready")
-                self?.mainComponent.reloadTableView()
+                //self?.mainComponent.reloadTableView()
             case .loading:
                 print("data is getting")
             case .failure:
@@ -68,4 +70,24 @@ class CharacterListViewController: BaseViewController<CharacterListViewModel> {
         }
     }
     
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: .doThisAction, name: .sampleNotif, object: nil)
+    }
+    
+    @objc fileprivate func doThisAction(_ sender: Notification) {
+        print("\(#function)")
+        mainComponent.reloadTableView()
+    }
+    
+}
+
+// MARK: - Notification Name Extensions
+extension Notification.Name {
+    static let sampleNotif = Notification.Name("sampleNotif")
+    static let getDataByUsingExternalInteractions = Notification.Name("getDataByUsingExternalInteractions")
+}
+
+// MARK: - Selector Extensions
+extension Selector {
+    static let doThisAction = #selector(CharacterListViewController.doThisAction)
 }

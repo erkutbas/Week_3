@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A73F0E142712E9B6005DA93D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A73F0E132712E9B6005DA93D /* RxCocoa */; };
+		A73F0E162712E9B6005DA93D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = A73F0E152712E9B6005DA93D /* RxRelay */; };
+		A73F0E182712E9B6005DA93D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A73F0E172712E9B6005DA93D /* RxSwift */; };
+		A73F0E1B2712E9FA005DA93D /* CharacterListOperationsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73F0E1A2712E9FA005DA93D /* CharacterListOperationsProtocol.swift */; };
 		A7BE133227118BD100905D1F /* CharacterListDataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BE133127118BD100905D1F /* CharacterListDataFormatter.swift */; };
 		A7BE133427118BDB00905D1F /* CharacterListDataFormatterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BE133327118BDB00905D1F /* CharacterListDataFormatterProtocol.swift */; };
 		A7BE133627119AF400905D1F /* LabelDistributionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BE133527119AF400905D1F /* LabelDistributionData.swift */; };
@@ -96,6 +100,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A73F0E1A2712E9FA005DA93D /* CharacterListOperationsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListOperationsProtocol.swift; sourceTree = "<group>"; };
 		A7BE133127118BD100905D1F /* CharacterListDataFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListDataFormatter.swift; sourceTree = "<group>"; };
 		A7BE133327118BDB00905D1F /* CharacterListDataFormatterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListDataFormatterProtocol.swift; sourceTree = "<group>"; };
 		A7BE133527119AF400905D1F /* LabelDistributionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDistributionData.swift; sourceTree = "<group>"; };
@@ -176,6 +181,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A73F0E162712E9B6005DA93D /* RxRelay in Frameworks */,
+				A73F0E142712E9B6005DA93D /* RxCocoa in Frameworks */,
+				A73F0E182712E9B6005DA93D /* RxSwift in Frameworks */,
 				A7CAF0A72708615500A12F1B /* DefaultNetworkOperationPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +205,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A73F0E192712E9DB005DA93D /* CharacterListOperationsManager */ = {
+			isa = PBXGroup;
+			children = (
+				A73F0E1A2712E9FA005DA93D /* CharacterListOperationsProtocol.swift */,
+			);
+			path = CharacterListOperationsManager;
+			sourceTree = "<group>";
+		};
 		A7C7E7E2270CC96C002D925C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +315,7 @@
 		A7CAF0D527087DA400A12F1B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A73F0E192712E9DB005DA93D /* CharacterListOperationsManager */,
 				A7CB4E572711CCCD008D67BC /* UserDefaultsHelperManagers */,
 				A7CAF0D627087DB300A12F1B /* CacheManagers */,
 			);
@@ -542,6 +559,9 @@
 			name = Week_3;
 			packageProductDependencies = (
 				A7CAF0A62708615500A12F1B /* DefaultNetworkOperationPackage */,
+				A73F0E132712E9B6005DA93D /* RxCocoa */,
+				A73F0E152712E9B6005DA93D /* RxRelay */,
+				A73F0E172712E9B6005DA93D /* RxSwift */,
 			);
 			productName = Week_3;
 			productReference = A7DF3F4927083E1900AD7519 /* Week_3.app */;
@@ -617,6 +637,7 @@
 			mainGroup = A7DF3F4027083E1900AD7519;
 			packageReferences = (
 				A7CAF0A52708615500A12F1B /* XCRemoteSwiftPackageReference "DefaultNetworkOperationPackage" */,
+				A73F0E122712E9B6005DA93D /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = A7DF3F4A27083E1900AD7519 /* Products */;
 			projectDirPath = "";
@@ -723,6 +744,7 @@
 				A7CAF0C327087BEF00A12F1B /* BaseTableViewCell.swift in Sources */,
 				A7CAF0DD2708CB7D00A12F1B /* TutorialViewModel.swift in Sources */,
 				A7DF3F892708438F00AD7519 /* GenericValueProtocol.swift in Sources */,
+				A73F0E1B2712E9FA005DA93D /* CharacterListOperationsProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1080,6 +1102,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A73F0E122712E9B6005DA93D /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		A7CAF0A52708615500A12F1B /* XCRemoteSwiftPackageReference "DefaultNetworkOperationPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/erkutbas/DefaultNetworkOperationPackage.git";
@@ -1091,6 +1121,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A73F0E132712E9B6005DA93D /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A73F0E122712E9B6005DA93D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		A73F0E152712E9B6005DA93D /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A73F0E122712E9B6005DA93D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		A73F0E172712E9B6005DA93D /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A73F0E122712E9B6005DA93D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
 		A7CAF0A62708615500A12F1B /* DefaultNetworkOperationPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A7CAF0A52708615500A12F1B /* XCRemoteSwiftPackageReference "DefaultNetworkOperationPackage" */;

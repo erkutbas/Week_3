@@ -8,10 +8,15 @@
 import Foundation
 import DefaultNetworkOperationPackage
 
+extension Selector {
+    static let fireDataFlow = #selector(CharacterListViewModel.fireDataFlow)
+}
+
 class CharacterListViewModel {
     
     deinit {
         print("DEINIT CharacterListViewModel")
+        NotificationCenter.default.removeObserver(self, name: .getDataByUsingExternalInteractions, object: nil)
     }
     
     private let formatter: CharacterListDataFormatterProtocol
@@ -21,6 +26,7 @@ class CharacterListViewModel {
     
     init(formatter: CharacterListDataFormatterProtocol) {
         self.formatter = formatter
+        addExternalUserInteractions()
     }
     
     func subscribeState(completion: @escaping CharacterListStateBlock) {
@@ -44,13 +50,23 @@ class CharacterListViewModel {
     }
     
     private func dataHandler(with response: CharacterDataResponse) {
-        self.data = response
+        data = response
         state?(.done)
+        fireSampleNotif()
+    }
+    
+    private func addExternalUserInteractions() {
+        NotificationCenter.default.addObserver(self, selector: .fireDataFlow, name: .getDataByUsingExternalInteractions, object: nil)
+    }
+    
+    @objc func fireDataFlow(_ sender: Notification) {
+        getCharacterList()
     }
     
     // MARK: - CallBack Listener
     private lazy var apiCallHandler: (Result<CharacterDataResponse, ErrorResponse>) -> Void = { [weak self] result in
         // to show how to handle error .....
+
         switch result {
         case .failure(let error):
             print("error : \(error)")
@@ -59,6 +75,11 @@ class CharacterListViewModel {
             self?.dataHandler(with: data)
         }
     }
+    
+    private func fireSampleNotif() {
+        NotificationCenter.default.post(name: .sampleNotif, object: nil)
+    }
+    
     
 }
 

@@ -13,7 +13,7 @@ class ItemListView: BaseView {
         print("DEINIT ItemListView")
     }
     
-    weak var pikacu: ItemListProtocol?
+    weak var delegate: ItemListProtocol?
     
     private lazy var tableView: UITableView = {
         let temp = UITableView()
@@ -54,16 +54,16 @@ class ItemListView: BaseView {
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return pikacu?.askNumberOfSection() ?? 0
+        return delegate?.askNumberOfSection() ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pikacu?.askNumberOfItem(in: section) ?? 0
+        return delegate?.askNumberOfItem(in: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let data = pikacu?.askData(at: indexPath.row) else { fatalError("Please provide data") }
+        guard let data = delegate?.askData(at: indexPath.row) else { fatalError("Please provide data") }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as? ItemTableViewCell else { return UITableViewCell() }
         
