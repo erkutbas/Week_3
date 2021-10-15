@@ -11,6 +11,7 @@ import RxSwift
 
 typealias CharacterListResult = Result<CharacterDataResponse, ErrorResponse>
 typealias CharacterListResultBlock = (Result<CharacterDataResponse, ErrorResponse>) -> Void
+typealias RickAndMortyResultBlock = (Result<RickAndMortyResponse, ErrorResponse>) -> Void
 
 class CharacterListOperationsManager: CharacterListOperationsProtocol {
     
@@ -24,6 +25,14 @@ class CharacterListOperationsManager: CharacterListOperationsProtocol {
     // MARK: - Public Methods
     func getCharacterListData() {
         fireApiCall(with: apiCallHandler)
+        fireApiCall2 { result in
+            switch result {
+            case .failure(let error):
+                print("error : \(error)")
+            case .success(let data):
+                print("data : \(data)")
+            }
+        }
     }
     
     func subscribeDataPublisher(with completion: @escaping CharacterListResultBlock) -> Disposable {
@@ -40,7 +49,18 @@ class CharacterListOperationsManager: CharacterListOperationsProtocol {
         dataFlowSubject.onNext(false)
         
         do {
-            let urlRequest = try MarvelCharactersApiServiceProvider().returnUrlRequest()
+            let urlRequest = try MarvelCharactersApiServiceProvider(headerProvider: HeaderProvider()).returnUrlRequest()
+            APIManager.shared.executeRequest(urlRequest: urlRequest, completion: completion)
+        } catch let error {
+            print("error : \(error)")
+        }
+        
+    }
+    
+    private func fireApiCall2(with completion: @escaping RickAndMortyResultBlock) {
+        
+        do {
+            let urlRequest = try RickAndMortyApiServiceProvider(request: RickAndMortyRequest(page: 2)).returnUrlRequest()
             APIManager.shared.executeRequest(urlRequest: urlRequest, completion: completion)
         } catch let error {
             print("error : \(error)")

@@ -20,7 +20,6 @@
 		A7C7E7E9270CD3D8002D925C /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C7E7E8270CD3D8002D925C /* BaseRequest.swift */; };
 		A7C7E7EB270CD61D002D925C /* CharacterListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C7E7EA270CD61D002D925C /* CharacterListViewState.swift */; };
 		A7CAF0A427085F7D00A12F1B /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAF0A327085F7D00A12F1B /* FavoriteViewController.swift */; };
-		A7CAF0A72708615500A12F1B /* DefaultNetworkOperationPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A7CAF0A62708615500A12F1B /* DefaultNetworkOperationPackage */; };
 		A7CAF0AF27086D6300A12F1B /* CharacterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAF0AE27086D6300A12F1B /* CharacterListViewController.swift */; };
 		A7CAF0B127086D7600A12F1B /* CharacterListViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAF0B027086D7600A12F1B /* CharacterListViewBuilder.swift */; };
 		A7CAF0B327086D8200A12F1B /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAF0B227086D8200A12F1B /* CharacterListViewModel.swift */; };
@@ -60,6 +59,8 @@
 		A7CB4E562711CC56008D67BC /* TutorialViewInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CB4E552711CC56008D67BC /* TutorialViewInfoStore.swift */; };
 		A7CB4E592711CCE0008D67BC /* ApplicationGeneralInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CB4E582711CCE0008D67BC /* ApplicationGeneralInfoProtocol.swift */; };
 		A7CB4E5B2711CD3C008D67BC /* ApplicationGeneralInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CB4E5A2711CD3C008D67BC /* ApplicationGeneralInfoManager.swift */; };
+		A7CDB7972719BB460006D521 /* HeaderProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CDB7962719BB460006D521 /* HeaderProvider.swift */; };
+		A7CDB79B2719BB7F0006D521 /* DefaultNetworkOperationPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A7CDB79A2719BB7F0006D521 /* DefaultNetworkOperationPackage */; };
 		A7DF3F4D27083E1900AD7519 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DF3F4C27083E1900AD7519 /* AppDelegate.swift */; };
 		A7DF3F4F27083E1900AD7519 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DF3F4E27083E1900AD7519 /* SceneDelegate.swift */; };
 		A7DF3F5127083E1900AD7519 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DF3F5027083E1900AD7519 /* ViewController.swift */; };
@@ -151,6 +152,8 @@
 		A7CB4E552711CC56008D67BC /* TutorialViewInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewInfoStore.swift; sourceTree = "<group>"; };
 		A7CB4E582711CCE0008D67BC /* ApplicationGeneralInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationGeneralInfoProtocol.swift; sourceTree = "<group>"; };
 		A7CB4E5A2711CD3C008D67BC /* ApplicationGeneralInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationGeneralInfoManager.swift; sourceTree = "<group>"; };
+		A7CDB7962719BB460006D521 /* HeaderProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProvider.swift; sourceTree = "<group>"; };
+		A7CDB7982719BB6B0006D521 /* DefaultNetworkOperationPackage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DefaultNetworkOperationPackage; path = ../../Desktop/DefaultNetworkOperationPackage; sourceTree = "<group>"; };
 		A7DF3F4927083E1900AD7519 /* Week_3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Week_3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7DF3F4C27083E1900AD7519 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7DF3F4E27083E1900AD7519 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,8 +188,8 @@
 			files = (
 				A73F0E162712E9B6005DA93D /* RxRelay in Frameworks */,
 				A73F0E142712E9B6005DA93D /* RxCocoa in Frameworks */,
+				A7CDB79B2719BB7F0006D521 /* DefaultNetworkOperationPackage in Frameworks */,
 				A73F0E182712E9B6005DA93D /* RxSwift in Frameworks */,
-				A7CAF0A72708615500A12F1B /* DefaultNetworkOperationPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +321,8 @@
 		A7CAF0D527087DA400A12F1B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A7CDB7952719BB3A0006D521 /* HeaderProvider */,
+				A73F0E1E271302CB005DA93D /* CharacterListOperationCombineManagers */,
 				A73F0E192712E9DB005DA93D /* CharacterListOperationsManager */,
 				A7CB4E572711CCCD008D67BC /* UserDefaultsHelperManagers */,
 				A7CAF0D627087DB300A12F1B /* CacheManagers */,
@@ -402,13 +407,30 @@
 			path = UserDefaultsHelperManagers;
 			sourceTree = "<group>";
 		};
+		A7CDB7952719BB3A0006D521 /* HeaderProvider */ = {
+			isa = PBXGroup;
+			children = (
+				A7CDB7962719BB460006D521 /* HeaderProvider.swift */,
+			);
+			path = HeaderProvider;
+			sourceTree = "<group>";
+		};
+		A7CDB7992719BB7F0006D521 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A7DF3F4027083E1900AD7519 = {
 			isa = PBXGroup;
 			children = (
+				A7CDB7982719BB6B0006D521 /* DefaultNetworkOperationPackage */,
 				A7DF3F4B27083E1900AD7519 /* Week_3 */,
 				A7DF3F6227083E1A00AD7519 /* Week_3Tests */,
 				A7DF3F6C27083E1A00AD7519 /* Week_3UITests */,
 				A7DF3F4A27083E1900AD7519 /* Products */,
+				A7CDB7992719BB7F0006D521 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -561,10 +583,10 @@
 			);
 			name = Week_3;
 			packageProductDependencies = (
-				A7CAF0A62708615500A12F1B /* DefaultNetworkOperationPackage */,
 				A73F0E132712E9B6005DA93D /* RxCocoa */,
 				A73F0E152712E9B6005DA93D /* RxRelay */,
 				A73F0E172712E9B6005DA93D /* RxSwift */,
+				A7CDB79A2719BB7F0006D521 /* DefaultNetworkOperationPackage */,
 			);
 			productName = Week_3;
 			productReference = A7DF3F4927083E1900AD7519 /* Week_3.app */;
@@ -639,7 +661,6 @@
 			);
 			mainGroup = A7DF3F4027083E1900AD7519;
 			packageReferences = (
-				A7CAF0A52708615500A12F1B /* XCRemoteSwiftPackageReference "DefaultNetworkOperationPackage" */,
 				A73F0E122712E9B6005DA93D /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = A7DF3F4A27083E1900AD7519 /* Products */;
@@ -737,6 +758,7 @@
 				A7C7E7E7270CD3AE002D925C /* MarvelCharactersApiServiceProvider.swift in Sources */,
 				A7DF3F832708434100AD7519 /* MainViewBuilder.swift in Sources */,
 				A7CAF0C727087CB900A12F1B /* LabelPackComponentData.swift in Sources */,
+				A7CDB7972719BB460006D521 /* HeaderProvider.swift in Sources */,
 				A7CAF0D427087D6A00A12F1B /* FontManager.swift in Sources */,
 				A7CAF0BE2708781B00A12F1B /* GenericDataProtocol.swift in Sources */,
 				A7BE133627119AF400905D1F /* LabelDistributionData.swift in Sources */,
@@ -1114,14 +1136,6 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		A7CAF0A52708615500A12F1B /* XCRemoteSwiftPackageReference "DefaultNetworkOperationPackage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/erkutbas/DefaultNetworkOperationPackage.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1140,9 +1154,8 @@
 			package = A73F0E122712E9B6005DA93D /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		A7CAF0A62708615500A12F1B /* DefaultNetworkOperationPackage */ = {
+		A7CDB79A2719BB7F0006D521 /* DefaultNetworkOperationPackage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A7CAF0A52708615500A12F1B /* XCRemoteSwiftPackageReference "DefaultNetworkOperationPackage" */;
 			productName = DefaultNetworkOperationPackage;
 		};
 /* End XCSwiftPackageProductDependency section */

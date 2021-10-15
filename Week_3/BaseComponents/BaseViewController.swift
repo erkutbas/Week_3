@@ -7,21 +7,21 @@
 
 import UIKit
 
-class BaseViewController<V>: UIViewController {
+open class BaseViewController<V>: UIViewController {
     
     var viewModel: V!
     
-    convenience init(viewModel: V) {
+    convenience public init(viewModel: V) {
         self.init()
         self.viewModel = viewModel
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         prepareViewControllerConfigurations()
     }
     
-    func prepareViewControllerConfigurations() {
+    public func prepareViewControllerConfigurations() {
         view.backgroundColor = .white
     }
     

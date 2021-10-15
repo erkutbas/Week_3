@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "DefaultNetworkOperationPackage",
-        "repositoryURL": "https://github.com/erkutbas/DefaultNetworkOperationPackage.git",
-        "state": {
-          "branch": "main",
-          "revision": "648dbc90e016270be09c38e9d3e9442c336f29be",
-          "version": null
-        }
-      },
-      {
         "package": "RxSwift",
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
